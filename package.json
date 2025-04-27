@@ -1,0 +1,61 @@
+{
+  "name": "html-auto-reload",
+  "version": "0.1.0",
+  "description": "Automatically detect HTML resource updates and prompt user to refresh the page. Support both Vite and Webpack.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./vite": {
+      "import": "./dist/esm/vite.js",
+      "require": "./dist/cjs/vite.js"
+    },
+    "./webpack": {
+      "import": "./dist/esm/webpack.js",
+      "require": "./dist/cjs/webpack.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/dufan3715/vite-plugin-html-auto-reload",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dufan3715/vite-plugin-html-auto-reload.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dufan3715/vite-plugin-html-auto-reload/issues"
+  },
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc --project tsconfig.mjs.json",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "html",
+    "auto-reload",
+    "vite-plugin",
+    "webpack-plugin",
+    "hot-reload",
+    "resource-update",
+    "frontend"
+  ],
+  "author": "dufan3715",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "vite": ">=3 || >=4 || >=5",
+    "webpack": ">=5"
+  },
+  "dependencies": {
+    "@types/node": "^22.5.0",
+    "vite": "^5.4.2",
+    "webpack": "^5.99.7"
+  }
+}
