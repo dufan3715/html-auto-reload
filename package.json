@@ -23,13 +23,13 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/dufan3715/vite-plugin-html-auto-reload",
+  "homepage": "https://github.com/dufan3715/html-auto-reload",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dufan3715/vite-plugin-html-auto-reload.git"
+    "url": "git+https://github.com/dufan3715/html-auto-reload.git"
   },
   "bugs": {
-    "url": "https://github.com/dufan3715/vite-plugin-html-auto-reload/issues"
+    "url": "https://github.com/dufan3715/html-auto-reload/issues"
   },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
