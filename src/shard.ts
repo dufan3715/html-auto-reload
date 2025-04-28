@@ -112,5 +112,5 @@ export const getScriptChildren = (publicPath: string, option: HtmlAutoReloadOpti
     };
     addEvent();
   `.replace(/^\s*[\r\n]/gm, '');
-  return `<script type="module">\n${funcStr}\n</script>`;
+  return `\n${funcStr}`;
 };

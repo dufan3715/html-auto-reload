@@ -9,9 +9,12 @@ export class HtmlAutoReloadWebpackPlugin {
   }
 
   apply(compiler: Compiler) {
-    compiler.hooks.emit.tapAsync('HtmlAutoReloadWebpackPlugin', (compilation, callback) => {
+    const pluginName = 'HtmlAutoReloadWebpackPlugin'
+    
+    compiler.hooks.emit.tapAsync(pluginName, (compilation, callback) => {
       const publicPath = (compiler.options.output?.publicPath ?? '/') as string;
-      const scriptTag = getScriptChildren(publicPath, this.option);
+      const scriptCtx = getScriptChildren(publicPath, this.option);
+      const scriptTag = `<script type="module">${scriptCtx}</script>`;
 
       Object.keys(compilation.assets).forEach((filename) => {
         if (filename.endsWith('.html')) {
