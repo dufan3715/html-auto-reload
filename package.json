@@ -1,22 +1,22 @@
 {
   "name": "html-auto-reload",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Automatically detect HTML resource updates and prompt user to refresh the page. Support both Vite and Webpack.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.mjs",
   "types": "dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
     },
     "./vite": {
-      "import": "./dist/esm/vite.js",
-      "require": "./dist/cjs/vite.js"
+      "import": "./dist/esm/vite.mjs",
+      "require": "./dist/cjs/vite.cjs"
     },
     "./webpack": {
-      "import": "./dist/esm/webpack.js",
-      "require": "./dist/cjs/webpack.js"
+      "import": "./dist/esm/webpack.mjs",
+      "require": "./dist/cjs/webpack.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -32,9 +32,8 @@
     "url": "https://github.com/dufan3715/html-auto-reload/issues"
   },
   "scripts": {
-    "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc --project tsconfig.mjs.json",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsup",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -50,12 +49,20 @@
   "license": "MIT",
   "private": false,
   "peerDependencies": {
-    "vite": ">=3 || >=4 || >=5",
+    "vite": ">=3 || >=4 || >=5 || >=6",
     "webpack": ">=5"
   },
-  "dependencies": {
-    "@types/node": "^22.5.0",
-    "vite": "^5.4.2",
-    "webpack": "^5.99.7"
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
   }
 }

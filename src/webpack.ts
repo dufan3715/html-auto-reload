@@ -1,7 +1,7 @@
-import { Compiler } from 'webpack';
-import { getScriptChildren, version, HtmlAutoReloadOption } from './shard';
+import { getScriptChildren, version } from './shard';
+import { Compiler, HtmlAutoReloadOption } from './type';
 
-export class HtmlAutoReloadWebpackPlugin {
+class HtmlAutoReloadWebpackPlugin {
   private option: HtmlAutoReloadOption;
 
   constructor(option: HtmlAutoReloadOption = {}) {
@@ -40,4 +40,5 @@ export class HtmlAutoReloadWebpackPlugin {
   }
 }
 
+export { HtmlAutoReloadWebpackPlugin };
 export default HtmlAutoReloadWebpackPlugin;

@@ -1,10 +1,10 @@
-import { PluginOption, ResolvedConfig } from 'vite';
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
-import { getScriptChildren, version, HtmlAutoReloadOption } from './shard';
+import { getScriptChildren, version } from './shard';
+import { HtmlAutoReloadOption, Plugin } from './type';
 
-export const HtmlAutoReloadVitePlugin = (option: HtmlAutoReloadOption = {}): PluginOption => {
-  let config: ResolvedConfig;
+export const HtmlAutoReloadVitePlugin = (option: HtmlAutoReloadOption = {}): Plugin => {
+  let config: any;
   return {
     name: 'html-auto-reload:vite',
     apply: 'build',
