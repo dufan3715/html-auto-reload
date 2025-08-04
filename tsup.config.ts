@@ -17,13 +17,14 @@ export default defineConfig([
   {
     entry: ['src/index.ts', 'src/vite.ts', 'src/webpack.ts'],
     format: ['cjs'],
-    dts: false,
+    dts: true,
     splitting: false,
     outDir: 'dist/cjs',
     outExtension({ format }) {
       return {
         js: '.cjs'
       }
-    }
+    },
+    external: ['vite', 'webpack']
   }
 ]) 

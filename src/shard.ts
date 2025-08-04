@@ -16,35 +16,31 @@ export const getScriptChildren = (publicPath: string, option: HtmlAutoReloadOpti
   const {
     onvisibilitychange = true,
     onerror = true,
-    once = true,
     polling = false,
-    promptContent = '请求资源已更新，请刷新页面',
+    prompt = true,
   } = option;
   const ms = typeof polling === 'number' ? polling : 1000 * 60;
+  const promptContent = prompt === true ? '请求资源已更新，请刷新页面' : prompt;
 
   const funcStr = `
     /* eslint-disable */
     const localVersion = '${version}';
-    const key = \`__html_auto_reload_\${localVersion}__\`;
-    let confirmed = sessionStorage.getItem(key) === 'Y';
     ${polling ? `let timer;` : ''}
     const checkVersion = () => {
-      if (confirmed) return;
       const url = \`${versionUrl}?t=\${Date.now()}\`;
       fetch(url)
         .then(res => res.text())
         .then(remoteVersion => {
-          if (confirmed) return;
           if (
             remoteVersion &&
             remoteVersion.length === localVersion.length &&
             remoteVersion !== localVersion
           ) {
-            ${once ? `confirmed = true;` : ''}
-            sessionStorage.setItem(key, 'Y')
-            if (window.confirm('${promptContent}')) {
-              window.location.reload();
-            } ${once ? `else { removeEvent(); }` : ''}
+            const key = \`__html_auto_reload_\${remoteVersion}__\`;
+            if (sessionStorage.getItem(key) !== 'Y') {
+              sessionStorage.setItem(key, 'Y');
+              ${promptContent ? `if (window.confirm('${promptContent}')) window.location.reload();` : `window.location.reload();`}
+            }
           }
         })
     };
@@ -61,20 +57,15 @@ export const getScriptChildren = (publicPath: string, option: HtmlAutoReloadOpti
       }
     }`
     : ''}
-    const controller = new AbortController();
-    function removeEvent() {
-      controller.abort();
-      ${polling ? `window.clearInterval(timer);` : ''}
-    };
     function addEvent() {
       ${onvisibilitychange ? `
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) return;
         checkVersion();
-      }, { signal: controller.signal });`
+      });`
     : ''}
       ${onerror ? `
-      window.addEventListener('error', errorListener, { capture: true, signal: controller.signal });`
+      window.addEventListener('error', errorListener, { capture: true });`
     : ''}
       ${polling ? `
       timer = setInterval(() => {

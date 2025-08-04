@@ -1,20 +1,23 @@
 {
   "name": "html-auto-reload",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Automatically detect HTML resource updates and prompt user to refresh the page. Support both Vite and Webpack.",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
-  "types": "dist/esm/index.d.ts",
+  "types": "dist/esm/index.d.mts",
   "exports": {
     ".": {
+      "types": "./dist/esm/index.d.mts",
       "import": "./dist/esm/index.mjs",
       "require": "./dist/cjs/index.cjs"
     },
     "./vite": {
+      "types": "./dist/esm/vite.d.mts",
       "import": "./dist/esm/vite.mjs",
       "require": "./dist/cjs/vite.cjs"
     },
     "./webpack": {
+      "types": "./dist/esm/webpack.d.mts",
       "import": "./dist/esm/webpack.mjs",
       "require": "./dist/cjs/webpack.cjs"
     },

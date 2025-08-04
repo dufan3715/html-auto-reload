@@ -80,11 +80,10 @@ module.exports = {
 
 | 参数 | 类型 | 默认值 | 描述 |
 | ---- | ---- | ---- | ---- |
-| once | boolean | true | 只询问一次刷新 |
 | onvisibilitychange | boolean | true | 页面可见时重新检测 |
 | onerror | boolean | true | 资源加载失败时检测 |
 | polling | boolean or number | false | 是否开启轮询检测（默认间隔 1 分钟） |
-| promptContent | string | "请求资源已更新，请刷新页面" | 弹窗提示内容 |
+| prompt | string or boolean | "请求资源已更新，请刷新页面" | 弹窗提示内容, 为假值时不弹窗提示 |
 
 
 ## 📖 工作原理

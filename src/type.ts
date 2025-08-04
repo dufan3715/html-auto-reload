@@ -5,11 +5,6 @@ export type { Plugin, Compiler };
 
 export type HtmlAutoReloadOption = {
   /**
-   * Whether to ask only once
-   * @default true
-   */
-  once?: boolean;
-  /**
    * Whether to get version on visibilitychange
    * @default true
    */
@@ -26,8 +21,8 @@ export type HtmlAutoReloadOption = {
    */
   polling?: boolean | number;
   /**
-   * Prompt content
+   * Whether to prompt
    * @default "请求资源已更新，请刷新页面"
    */
-  promptContent?: string;
+  prompt?: boolean | string | null;
 };
