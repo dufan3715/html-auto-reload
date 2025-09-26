@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { getScriptChildren, version } from './shard';
 import { HtmlAutoReloadOption, Plugin } from './type';
@@ -22,7 +22,10 @@ export const HtmlAutoReloadVitePlugin = (option: HtmlAutoReloadOption = {}): Plu
     closeBundle() {
       const outputDir = resolve(config.build.outDir);
       const outputPath = resolve(outputDir, 'version.txt');
-      writeFileSync(outputPath, version);
+      if (!existsSync(outputDir)) {
+        mkdirSync(outputDir, { recursive: true });
+      }
+      writeFileSync(outputPath, version, 'utf-8');
     },
   };
 };
